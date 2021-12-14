@@ -1,0 +1,36 @@
+---
+title: "Final Project"
+author: "Kadence Boatman (they/she)"
+date: "2021-12-14"
+output: html_notebook
+---
+
+```{r include=FALSE}
+# Cleaning up and loading packages
+
+rm(list = ls())
+library(mosaic)
+library(tidyverse)
+library(rvest)
+```
+
+
+```{r}
+# Data intake
+
+HateCrimes <-
+  read_csv("Hate_Crime_Incidents_per_Bias_Motivation_and_Quarter_by_State_Federal_and_Agency_2019.csv")
+
+
+# TDOR stands for Trans Day of Remembrance
+
+tdor <- "https://tdor.translivesmatter.info/pages/stats"
+
+SetOfTablesTDOR <- tdor %>%
+  read_html() %>%
+  html_nodes(css = "table") %>%
+  html_table(fill = TRUE)
+
+DeathsByYear <- SetOfTablesTDOR[[1]]
+```
+
